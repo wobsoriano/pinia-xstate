@@ -4,6 +4,7 @@
   "files": [
     "dist"
   ],
+  "license": "MIT",
   "main": "./dist/pinia-xstate.umd.js",
   "module": "./dist/pinia-xstate.es.js",
   "exports": {
