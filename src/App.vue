@@ -6,7 +6,6 @@
         : 'Active! Click to deactivate'
     }}
   </button>
-  <Another/>
 </template>
 
 <script setup lang="ts">
