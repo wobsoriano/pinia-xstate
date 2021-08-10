@@ -14,7 +14,7 @@ const devConfig = defineConfig({
       compilerOptions: {
         exclude: resolvePath('node_modules/**'),
       },
-      "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"]
+      include: ['src/**/*.ts', 'src/**/*.d.ts', 'src/**/*.vue']
     })
   ],
   build: {
@@ -44,10 +44,10 @@ const prodConfig = defineConfig({
   plugins: [
     dts({
       compilerOptions: {
-        rootDir: resolvePath("lib"),
+        rootDir: resolvePath('lib'),
         exclude: resolvePath('node_modules/**'),
       },
-      "include": ["src/**/*.ts", "src/**/*.d.ts", "src/**/*.vue"]
+      include: ['./lib']
     })
   ],
 });
