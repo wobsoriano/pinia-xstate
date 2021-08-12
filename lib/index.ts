@@ -1,6 +1,6 @@
 import { StateMachine, Interpreter, interpret } from 'xstate';
 import { defineStore } from 'pinia';
-import { ComputedRef, shallowRef, computed, onUnmounted } from 'vue';
+import { ComputedRef, shallowRef, computed } from 'vue';
 
 export type Store<M> = M extends StateMachine<
   infer Context,
@@ -26,7 +26,6 @@ export default function useMachine<M extends StateMachine<any, any, any, any>>(m
                 state.value = nextState;
             }
         }).start();
-        onUnmounted(service.stop);
         return { state }
     });
     const store = useStore();

@@ -12,9 +12,7 @@
 import useMachine from '../lib'
 import { toggleMachine } from './store'
 import Another from './components/Another.vue'
+import { watchEffect } from 'vue'
 
-const {state, send} = useMachine(toggleMachine)
-
-// const {state, send} = useMachine();
-// console.log(state)
+const { state, send, service } = useMachine(toggleMachine)
 </script>
