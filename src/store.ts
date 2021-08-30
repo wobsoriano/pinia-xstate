@@ -1,22 +1,12 @@
+import { defineStore } from 'pinia';
 import { createMachine, assign } from 'xstate';
+import xstate from '../lib';
 
 const increment = (context) => context.count + 1;
 const decrement = (context) => context.count - 1;
 
-export const toggleMachine = createMachine({
-    id: 'toggle',
-    initial: 'inactive',
-    states: {
-      inactive: {
-        on: { TOGGLE: 'active' }
-      },
-      active: {
-        on: { TOGGLE: 'inactive' }
-      }
-    }
-  });
-
 export const counterMachine = createMachine({
+  id: 'counter',
   initial: 'active',
   context: {
     count: 0
@@ -31,33 +21,4 @@ export const counterMachine = createMachine({
   }
 });
 
-type Context = {};
-
-type Events = { type: "TIMER" | "DISABLE" | "ENABLE" };
-
-type States = {
-  value: "red" | "redYellow" | "yellow" | "green" | "disabled";
-  context: Context;
-};
-
-export const lightMachine = createMachine<Context, Events, States>({
-  id: "light",
-  initial: "green",
-  states: {
-    red: {
-      on: { TIMER: "redYellow", DISABLE: "disabled" },
-    },
-    redYellow: {
-      on: { TIMER: "green", DISABLE: "disabled" },
-    },
-    green: {
-      on: { TIMER: "yellow", DISABLE: "disabled" },
-    },
-    yellow: {
-      on: { TIMER: "red", DISABLE: "disabled" },
-    },
-    disabled: {
-      on: { ENABLE: "red" },
-    },
-  },
-});
+export const useCounterStore = defineStore(counterMachine.id, xstate(counterMachine))

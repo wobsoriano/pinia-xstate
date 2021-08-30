@@ -1,7 +1,5 @@
 import { StateMachine, Interpreter, interpret } from 'xstate';
-import { defineStore } from 'pinia';
 import { shallowRef, Ref, markRaw } from 'vue';
-import { counterMachine } from '../src/store';
 
 export type Store<M> = M extends StateMachine<
   infer Context,
@@ -36,4 +34,4 @@ function xstate<M extends StateMachine<any, any, any, any>>(machine: M) {
   }
 }
 
-export const useStore = defineStore('id', xstate(counterMachine))
+export default xstate
