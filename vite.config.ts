@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import vue from '@vitejs/plugin-vue';
 import path from 'path';
 import dts from 'vite-plugin-dts';
+import pkg from './package.json';
 
 const resolvePath = (str: string) => path.resolve(__dirname, str);
 
@@ -9,13 +10,7 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const devConfig = defineConfig({
   plugins: [
-    vue(),
-    dts({
-      compilerOptions: {
-        exclude: resolvePath('node_modules/**'),
-      },
-      include: ['src/**/*.ts', 'src/**/*.d.ts', 'src/**/*.vue']
-    })
+    vue()
   ],
   build: {
     outDir: 'dist-demo',
@@ -27,8 +22,8 @@ const prodConfig = defineConfig({
   build: {
     lib: {
       entry: resolvePath('lib/index.ts'),
-      name: 'pinia-xstate',
-      fileName: (format) => `pinia-xstate.${format}.js`,
+      name: pkg.name,
+      fileName: (format) => `${pkg.name}.${format}.js`,
     },
     rollupOptions: {
       external: ['vue', 'pinia', 'xstate'],

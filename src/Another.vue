@@ -1,18 +1,12 @@
 <template>
   <div>
-    <div>{{store.state.context.count}}</div>
+      <div>{{store.state.context.count}}</div>
   <button @click="store.send('INC')">+</button>
   <button @click="store.send('DEC')">-</button>
-  <br />
-  <br />
-  <Another />
   </div>
 </template>
 
 <script setup lang="ts">
-import { computed } from 'vue';
 import { useStore } from '../lib'
-import Another from './Another.vue'
-
 const store = useStore()
 </script>
