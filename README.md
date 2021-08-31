@@ -1,5 +1,8 @@
 # pinia-xstate
 
+[![npm version](https://badge.fury.io/js/pinia-xstate.svg)](https://badge.fury.io/js/pinia-xstate)
+[![bundle size](https://badgen.net/bundlephobia/minzip/pinia-xstate)](https://bundlephobia.com/result?p=pinia-xstate)
+
 This middleware allows you to easily put your [xstate](https://github.com/statelyai/xstate) state machines into a global [pinia](https://pinia.esm.dev/) store.
 
 ## Installation
@@ -34,7 +37,7 @@ export const counterMachine = createMachine({
   }
 });
 
-// create a hook using the xstate middleware
+// create a store using the xstate middleware
 export const useCounterStore = defineStore(counterMachine.id, xstate(counterMachine))
 
 // use the store in your components
@@ -44,3 +47,7 @@ store.state.context.count
 store.send('INC')
 store.send('DEC')
 ```
+
+## License
+
+MIT License © 2021 [Robert Soriano](https://github.com/wobsoriano)
