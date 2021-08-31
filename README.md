@@ -8,7 +8,7 @@ This middleware allows you to easily put your [xstate](https://github.com/statel
 ## Installation
 
 ```sh
-yarn add pinia-xstate
+yarn add pinia-xstate pinia@beta xstate
 ```
 
 ## Usage
