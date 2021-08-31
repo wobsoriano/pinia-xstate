@@ -1,6 +1,6 @@
 # pinia-xstate
 
-This composable allows you to easily put your [xstate](https://github.com/statelyai/xstate) state machines into a global [pinia](https://pinia.esm.dev/) store.
+This middleware allows you to easily put your [xstate](https://github.com/statelyai/xstate) state machines into a global [pinia](https://pinia.esm.dev/) store.
 
 ## Installation
 
@@ -10,36 +10,37 @@ yarn add pinia-xstate
 
 ## Usage
 
-```html
-<template>
-  <button @click="send('TOGGLE')">
-    {{
-    state.value === 'inactive'
-        ? 'Click to activate'
-        : 'Active! Click to deactivate'
-    }}
-  </button>
-</template>
+```ts
+import { defineStore } from 'pinia';
+import { createMachine, assign } from 'xstate';
+import xstate from 'pinia-xstate';
 
-<script setup>
-import { createMachine } from 'xstate';
-import useMachine from 'pinia-xstate'
+const increment = (context) => context.count + 1;
+const decrement = (context) => context.count - 1;
 
-// create your machine
-const machine = createMachine({
-  id: 'machine',
-  initial: 'inactive',
+export const counterMachine = createMachine({
+  id: 'counter',
+  initial: 'active',
+  context: {
+    count: 0
+  },
   states: {
-    inactive: {
-        on: { TOGGLE: 'active' }
-    },
     active: {
-        on: { TOGGLE: 'inactive' }
+      on: {
+        INC: { actions: assign({ count: increment }) },
+        DEC: { actions: assign({ count: decrement }) }
+      }
     }
   }
 });
 
-// pass the machine to the pinia-xstate composable
-const { state, send, service } = useMachine(machine);
-</script>
+// create a hook using the xstate middleware
+export const useCounterStore = defineStore(counterMachine.id, xstate(counterMachine))
+
+// use the store in your components
+const store = useCounterStore()
+
+store.state.context.count
+store.send('INC')
+store.send('DEC')
 ```

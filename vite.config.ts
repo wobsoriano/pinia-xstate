@@ -42,7 +42,7 @@ const prodConfig = defineConfig({
         rootDir: resolvePath('lib'),
         exclude: resolvePath('node_modules/**'),
       },
-      include: ['./lib']
+      // include: resolvePath('lib')
     })
   ],
 });
