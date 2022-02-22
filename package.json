@@ -1,6 +1,6 @@
 {
   "name": "pinia-xstate",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "files": [
     "dist"
   ],
@@ -25,15 +25,17 @@
     "@vue/compiler-sfc": "^3.2.0",
     "typescript": "^4.3.2",
     "vite": "^2.4.4",
-    "vite-plugin-dts": "^0.5.3",
-    "vue-tsc": "^0.2.2",
-    "pinia": "beta",
+    "vite-plugin-dts": "^0.9.9",
     "vue": "^3.2.0",
-    "xstate": "^4.23.1"
+    "vue-tsc": "^0.2.2",
+    "xstate": "^4.30.2"
   },
   "peerDependencies": {
-    "pinia": "beta",
-    "xstate": "^4.23.1"
+    "pinia": "^2.0.0",
+    "xstate": "^4.30.0"
   },
-  "sideEffects": false
+  "sideEffects": false,
+  "dependencies": {
+    "pinia": "^2.0.11"
+  }
 }
