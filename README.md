@@ -8,44 +8,47 @@ This middleware allows you to easily put your [xstate](https://github.com/statel
 ## Installation
 
 ```sh
-yarn add pinia-xstate pinia@beta xstate
+yarn add pinia-xstate pinia xstate
 ```
 
 ## Usage
 
 ```ts
-import { defineStore } from 'pinia';
-import { createMachine, assign } from 'xstate';
-import xstate from 'pinia-xstate';
+import { defineStore } from "pinia";
+import { createMachine, assign } from "xstate";
+import xstate from "pinia-xstate";
 
 const increment = (context) => context.count + 1;
 const decrement = (context) => context.count - 1;
 
 export const counterMachine = createMachine({
-  id: 'counter',
-  initial: 'active',
+  id: "counter",
+  initial: "active",
   context: {
-    count: 0
+    count: 0,
   },
   states: {
     active: {
       on: {
         INC: { actions: assign({ count: increment }) },
-        DEC: { actions: assign({ count: decrement }) }
-      }
-    }
-  }
+        DEC: { actions: assign({ count: decrement }) },
+      },
+    },
+  },
 });
 
 // create a store using the xstate middleware
-export const useCounterStore = defineStore(counterMachine.id, xstate(counterMachine))
+export const useCounterStore = defineStore(
+  counterMachine.id,
+  xstate(counterMachine)
+);
 
 // use the store in your components
-const store = useCounterStore()
+const store = useCounterStore();
 
-store.state.context.count
-store.send('INC')
-store.send('DEC')
+store.state.context.count;
+store.send("INC");
+store.send("DEC");
 ```
 
 ## License
