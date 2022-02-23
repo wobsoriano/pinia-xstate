@@ -14,16 +14,16 @@ yarn add pinia-xstate pinia xstate
 ## Usage
 
 ```ts
-import { defineStore } from "pinia";
-import { createMachine, assign } from "xstate";
-import xstate from "pinia-xstate";
+import { defineStore } from 'pinia'
+import { createMachine, assign } from 'xstate'
+import xstate from 'pinia-xstate'
 
-const increment = (context) => context.count + 1;
-const decrement = (context) => context.count - 1;
+const increment = (context) => context.count + 1
+const decrement = (context) => context.count - 1
 
 export const counterMachine = createMachine({
-  id: "counter",
-  initial: "active",
+  id: 'counter',
+  initial: 'active',
   context: {
     count: 0,
   },
@@ -35,22 +35,22 @@ export const counterMachine = createMachine({
       },
     },
   },
-});
+})
 
 // create a store using the xstate middleware
 export const useCounterStore = defineStore(
   counterMachine.id,
   xstate(counterMachine)
-);
+)
 
 // use the store in your components
-const store = useCounterStore();
+const store = useCounterStore()
 
-store.state.context.count;
-store.send("INC");
-store.send("DEC");
+store.state.context.count
+store.send('INC')
+store.send('DEC')
 ```
 
 ## License
 
-MIT License © 2021 [Robert Soriano](https://github.com/wobsoriano)
+MIT License © 2022 [Robert Soriano](https://github.com/wobsoriano)

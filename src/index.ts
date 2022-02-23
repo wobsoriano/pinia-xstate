@@ -1,5 +1,5 @@
-import { StateMachine, Interpreter, interpret } from "xstate";
-import { markRaw, ref, Ref } from "vue";
+import { StateMachine, Interpreter, interpret } from 'xstate'
+import { markRaw, ref, Ref } from 'vue'
 
 export type Store<M> = M extends StateMachine<
   infer Context,
@@ -11,35 +11,35 @@ export type Store<M> = M extends StateMachine<
   infer _C
 >
   ? {
-      state: Ref<Interpreter<Context, Schema, Event, State>["state"]>;
-      send: Interpreter<Context, Schema, Event, State>["send"];
-      service: Interpreter<Context, Schema, Event, State>;
+      state: Ref<Interpreter<Context, Schema, Event, State>['state']>
+      send: Interpreter<Context, Schema, Event, State>['send']
+      service: Interpreter<Context, Schema, Event, State>
     }
-  : never;
+  : never
 
 function xstate<M extends StateMachine<any, any, any, any, any, any, any>>(
   machine: M
 ) {
-  const service = interpret(machine);
+  const service = interpret(machine)
   return () => {
-    const state = ref(machine.initialState);
+    const state = ref(machine.initialState)
     service
       .onTransition((nextState) => {
         const initialStateChanged =
           nextState.changed === undefined &&
-          Object.keys(nextState.children).length;
+          Object.keys(nextState.children).length
 
         if (nextState.changed || initialStateChanged) {
-          state.value = nextState;
+          state.value = nextState
         }
       })
-      .start();
+      .start()
     return {
       state,
       send: markRaw(service.send),
       service: markRaw(service),
-    } as Store<M>;
-  };
+    } as Store<M>
+  }
 }
 
-export default xstate;
+export default xstate

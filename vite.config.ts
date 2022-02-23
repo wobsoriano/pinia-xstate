@@ -1,24 +1,24 @@
-import { defineConfig } from "vite";
-import path from "path";
-import dts from "vite-plugin-dts";
-import pkg from "./package.json";
+import { defineConfig } from 'vite'
+import path from 'path'
+import dts from 'vite-plugin-dts'
+import pkg from './package.json'
 
-const resolvePath = (str: string) => path.resolve(__dirname, str);
+const resolvePath = (str: string) => path.resolve(__dirname, str)
 
 const prodConfig = defineConfig({
   build: {
     lib: {
-      entry: resolvePath("lib/index.ts"),
+      entry: resolvePath('lib/index.ts'),
       name: pkg.name,
       fileName: (format) => `${pkg.name}.${format}.js`,
     },
     rollupOptions: {
-      external: ["vue", "pinia", "xstate"],
+      external: ['vue', 'pinia', 'xstate'],
       output: {
         globals: {
-          vue: "Vue",
-          pinia: "pinia",
-          xstate: "xstate",
+          vue: 'Vue',
+          pinia: 'pinia',
+          xstate: 'xstate',
         },
       },
     },
@@ -26,11 +26,11 @@ const prodConfig = defineConfig({
   plugins: [
     dts({
       compilerOptions: {
-        rootDir: resolvePath("lib"),
-        exclude: resolvePath("node_modules/**"),
+        rootDir: resolvePath('lib'),
+        exclude: resolvePath('node_modules/**'),
       },
     }),
   ],
-});
+})
 
-export default prodConfig;
+export default prodConfig
