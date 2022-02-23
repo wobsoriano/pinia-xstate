@@ -8,7 +8,7 @@ const resolvePath = (str: string) => path.resolve(__dirname, str)
 const prodConfig = defineConfig({
   build: {
     lib: {
-      entry: resolvePath('lib/index.ts'),
+      entry: resolvePath('src/index.ts'),
       name: pkg.name,
       fileName: (format) => `${pkg.name}.${format}.js`,
     },
@@ -26,7 +26,7 @@ const prodConfig = defineConfig({
   plugins: [
     dts({
       compilerOptions: {
-        rootDir: resolvePath('lib'),
+        rootDir: resolvePath('src'),
         exclude: resolvePath('node_modules/**'),
       },
     }),
