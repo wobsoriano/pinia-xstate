@@ -25,10 +25,7 @@ const prodConfig = defineConfig({
   },
   plugins: [
     dts({
-      compilerOptions: {
-        rootDir: resolvePath('src'),
-        exclude: resolvePath('node_modules/**'),
-      },
+      insertTypesEntry: true,
     }),
   ],
 })
