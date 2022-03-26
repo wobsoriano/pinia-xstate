@@ -7,8 +7,8 @@ This middleware allows you to easily put your [xstate](https://github.com/statel
 
 ## Installation
 
-```sh
-pnpm add pinia-xstate pinia xstate
+```bash
+pnpm add pinia xstate pinia-xstate # or npm or yarn
 ```
 
 ## Usage
@@ -53,4 +53,4 @@ store.send('DEC')
 
 ## License
 
-MIT License © 2022 [Robert Soriano](https://github.com/wobsoriano)
+MIT
