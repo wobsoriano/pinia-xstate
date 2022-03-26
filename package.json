@@ -19,16 +19,15 @@
     "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
-    "tsup": "^5.11.13",
+    "tsup": "^5.12.1",
     "typescript": "^4.3.2",
-    "vitest": "^0.5.4",
-    "xstate": "^4.30.2"
+    "vitest": "^0.7.11",
+    "xstate": "^4.30.6"
   },
   "peerDependencies": {
     "pinia": "^2.0.0",
     "xstate": "^4.30.0"
   },
-  "sideEffects": false,
   "dependencies": {
     "pinia": "^2.0.11",
     "vue": "^3.2.31"

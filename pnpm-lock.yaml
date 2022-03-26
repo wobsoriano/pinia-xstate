@@ -2,21 +2,21 @@ lockfileVersion: 5.3
 
 specifiers:
   pinia: ^2.0.11
-  tsup: ^5.11.13
+  tsup: ^5.12.1
   typescript: ^4.3.2
-  vitest: ^0.5.4
+  vitest: ^0.7.11
   vue: ^3.2.31
-  xstate: ^4.30.2
+  xstate: ^4.30.6
 
 dependencies:
   pinia: 2.0.11_typescript@4.5.5+vue@3.2.31
   vue: 3.2.31
 
 devDependencies:
-  tsup: 5.11.13_typescript@4.5.5
+  tsup: 5.12.1_typescript@4.5.5
   typescript: 4.5.5
-  vitest: 0.5.4
-  xstate: 4.30.2
+  vitest: 0.7.11
+  xstate: 4.30.6
 
 packages:
 
@@ -977,8 +977,8 @@ packages:
     resolution: {integrity: sha512-Y/arvbn+rrz3JCKl9C4kVNfTfSm2/mEp5FSz5EsZSANGPSlQrpRI5M4PKF+mJnE52jOO90PnPSc3Ur3bTQw0gA==}
     dev: true
 
-  /tsup/5.11.13_typescript@4.5.5:
-    resolution: {integrity: sha512-NVMK01gVmojZn7+iZwxRK1CzW2BIabaVMyEjs7Nm9lm4DrSf7IAqs2F3fg0vT7rH72x1cIBsW9U/TlWrCvHVQQ==}
+  /tsup/5.12.1_typescript@4.5.5:
+    resolution: {integrity: sha512-vI7E4T6+6n5guQ9UKUOkQmzd1n4V9abGK71lbnzJMLJspbkNby5zlwWvgvHafLdYCb1WXpjFuqqmNLjBA0Wz3g==}
     hasBin: true
     peerDependencies:
       typescript: ^4.1.0
@@ -1017,8 +1017,8 @@ packages:
     hasBin: true
     dev: true
 
-  /vite/2.8.4:
-    resolution: {integrity: sha512-GwtOkkaT2LDI82uWZKcrpRQxP5tymLnC7hVHHqNkhFNknYr0hJUlDLfhVRgngJvAy3RwypkDCWtTKn1BjO96Dw==}
+  /vite/2.8.6:
+    resolution: {integrity: sha512-e4H0QpludOVKkmOsRyqQ7LTcMUDF3mcgyNU4lmi0B5JUbe0ZxeBBl8VoZ8Y6Rfn9eFKYtdXNPcYK97ZwH+K2ug==}
     engines: {node: '>=12.2.0'}
     hasBin: true
     peerDependencies:
@@ -1041,9 +1041,9 @@ packages:
       fsevents: 2.3.2
     dev: true
 
-  /vitest/0.5.4:
-    resolution: {integrity: sha512-mQ6Wj5vczFybtb/kZ419gLqQRroLgqRdkVkNyC4Dz6XWDGBhBNEVP/KryLGgovEGvs9nlJBacaFXWt+6Cgdstg==}
-    engines: {node: '>=14.14.0'}
+  /vitest/0.7.11:
+    resolution: {integrity: sha512-xCEUBCpqiIVhUFIMCKKXDZ/bcPLk2EhPmTFA9qw+Kf+B2d/gm3ZBdUAMa3jIZNZ/d3esji5H6XZPNAk//9K4Kw==}
+    engines: {node: '>=v14.16.0'}
     hasBin: true
     peerDependencies:
       '@vitest/ui': '*'
@@ -1066,7 +1066,7 @@ packages:
       local-pkg: 0.4.1
       tinypool: 0.1.2
       tinyspy: 0.3.0
-      vite: 2.8.4
+      vite: 2.8.6
     transitivePeerDependencies:
       - less
       - sass
@@ -1110,8 +1110,8 @@ packages:
     resolution: {integrity: sha1-tSQ9jz7BqjXxNkYFvA0QNuMKtp8=}
     dev: true
 
-  /xstate/4.30.2:
-    resolution: {integrity: sha512-nstZNgz6bzog0wut7jYFmb9ZUZmcyYszkv7f//TNu2CnKCROezOduCTGgpjWrf0W8JnAXV4wEgw5dsC9kVqMFQ==}
+  /xstate/4.30.6:
+    resolution: {integrity: sha512-V7liK1cjkZRh6R/MSneG8S5VLGRatpOUcnNieiYJX4LbwKi9eUVUH5V04ugJYVcJ+2oKDKvEFvzk0VnSC7lTag==}
     dev: true
 
   /yaml/1.10.2:
