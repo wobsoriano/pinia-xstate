@@ -16,9 +16,11 @@
     "build-fast": "tsup src/index.ts --format cjs,esm",
     "build": "pnpm run build-fast -- --dts-resolve",
     "test": "vitest run",
+    "release": "bumpp --commit --push --tag && pnpm publish",
     "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
+    "bumpp": "^7.1.1",
     "tsup": "^5.12.1",
     "typescript": "^4.3.2",
     "vitest": "^0.7.11",
