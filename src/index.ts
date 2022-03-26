@@ -1,5 +1,7 @@
-import { StateMachine, Interpreter, interpret } from 'xstate'
-import { markRaw, ref, Ref } from 'vue'
+import { interpret } from 'xstate'
+import type { StateMachine, Interpreter } from 'xstate'
+import type { Ref } from 'vue'
+import { markRaw, ref } from 'vue'
 
 export type Store<M> = M extends StateMachine<
   infer Context,
