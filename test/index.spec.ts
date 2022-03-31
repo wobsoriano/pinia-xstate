@@ -6,7 +6,7 @@ import xstate from '../src'
 const increment = (context) => context.count + 1
 const decrement = (context) => context.count - 1
 
-export const counterMachine = createMachine({
+const counterMachine = createMachine({
   id: 'counter',
   initial: 'active',
   context: {
