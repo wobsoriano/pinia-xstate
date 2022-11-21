@@ -1,4 +1,4 @@
-import { interpret } from 'xstate'
+import { interpret, State } from 'xstate'
 import type { StateMachine, Interpreter, InterpreterOptions } from 'xstate'
 import type { Ref } from 'vue'
 import { markRaw, ref } from 'vue'
@@ -41,7 +41,7 @@ function xstate<M extends StateMachine<any, any, any, any, any, any, any>>(
           state.value = nextState
         }
       })
-      .start(initialState)
+      .start(State.create(initialState))
     return {
       state,
       send: markRaw(service.send),
