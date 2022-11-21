@@ -25,10 +25,6 @@ function xstate<M extends StateMachine<any, any, any, any, any, any, any>>(
   initialState = machine.initialState,
 ) {
   const service = interpret(machine, interpreterOptions)
-  if (interpreterOptions) {
-    console.log('INTERPRETER OPTIONS WERE PASSED:', interpreterOptions)
-    console.log('INITIAL STATE FOR HYDRATION: ', initialState)
-  }
   return () => {
     const state = ref(initialState)
     service
