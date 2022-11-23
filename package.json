@@ -1,6 +1,6 @@
 {
   "name": "pinia-xstate",
-  "version": "1.0.7",
+  "version": "1.0.8",
   "description": "Put your xstate state machines into a global pinia store.",
   "license": "MIT",
   "keywords": [
