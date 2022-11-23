@@ -1,5 +1,5 @@
-import { interpret } from 'xstate'
-import type { StateMachine, Interpreter } from 'xstate'
+import { interpret, State } from 'xstate'
+import type { StateMachine, Interpreter, InterpreterOptions } from 'xstate'
 import type { Ref } from 'vue'
 import { markRaw, ref } from 'vue'
 
@@ -20,11 +20,13 @@ export type Store<M> = M extends StateMachine<
   : never
 
 function xstate<M extends StateMachine<any, any, any, any, any, any, any>>(
-  machine: M
+  machine: M,
+  interpreterOptions?: InterpreterOptions,
+  initialState = machine.initialState,
 ) {
-  const service = interpret(machine)
+  const service = interpret(machine, interpreterOptions)
   return () => {
-    const state = ref(machine.initialState)
+    const state = ref(initialState)
     service
       .onTransition((nextState) => {
         const initialStateChanged =
@@ -35,7 +37,7 @@ function xstate<M extends StateMachine<any, any, any, any, any, any, any>>(
           state.value = nextState
         }
       })
-      .start()
+      .start(State.create(initialState))
     return {
       state,
       send: markRaw(service.send),
