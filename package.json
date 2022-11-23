@@ -20,11 +20,11 @@
     "prepublishOnly": "pnpm run build"
   },
   "devDependencies": {
-    "bumpp": "^7.1.1",
-    "tsup": "^5.12.1",
+    "bumpp": "^8.2.1",
+    "tsup": "^6.5.0",
     "typescript": "^4.3.2",
-    "vitest": "^0.8.1",
-    "xstate": "^4.30.6"
+    "vitest": "^0.25.3",
+    "xstate": "^4.34.0"
   },
   "peerDependencies": {
     "pinia": "^2.0.0",
