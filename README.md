@@ -15,11 +15,11 @@ pnpm add pinia xstate pinia-xstate # or npm or yarn
 
 ```ts
 import { defineStore } from 'pinia'
-import { createMachine, assign } from 'xstate'
+import { assign, createMachine } from 'xstate'
 import xstate from 'pinia-xstate'
 
-const increment = (context) => context.count + 1
-const decrement = (context) => context.count - 1
+const increment = context => context.count + 1
+const decrement = context => context.count - 1
 
 export const counterMachine = createMachine({
   id: 'counter',

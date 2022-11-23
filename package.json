@@ -1,30 +1,25 @@
 {
   "name": "pinia-xstate",
   "version": "1.0.7",
-  "files": [
-    "dist"
-  ],
   "license": "MIT",
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
   "exports": {
     "require": "./dist/index.js",
     "import": "./dist/index.mjs"
   },
+  "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "files": [
+    "dist"
+  ],
   "scripts": {
     "build-fast": "tsup src/index.ts --format cjs,esm",
     "build": "pnpm run build-fast -- --dts-resolve --minify",
     "test": "vitest run",
     "release": "bumpp --commit --push --tag && pnpm publish",
-    "prepublishOnly": "pnpm run build"
-  },
-  "devDependencies": {
-    "bumpp": "^8.2.1",
-    "tsup": "^6.5.0",
-    "typescript": "^4.3.2",
-    "vitest": "^0.25.3",
-    "xstate": "^4.34.0"
+    "prepublishOnly": "pnpm run build",
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "peerDependencies": {
     "pinia": "^2.0.0",
@@ -34,8 +29,16 @@
     "pinia": "^2.0.11",
     "vue": "^3.2.31"
   },
-  "prettier": {
-    "singleQuote": true,
-    "semi": false
+  "devDependencies": {
+    "@antfu/eslint-config": "^0.31.0",
+    "bumpp": "^8.2.1",
+    "eslint": "^8.28.0",
+    "tsup": "^6.5.0",
+    "typescript": "^4.3.2",
+    "vitest": "^0.25.3",
+    "xstate": "^4.34.0"
+  },
+  "eslintConfig": {
+    "extends": "@antfu"
   }
 }

@@ -1,10 +1,10 @@
-import { setActivePinia, createPinia, defineStore } from 'pinia'
-import { describe, expect, beforeEach, test } from 'vitest'
-import { createMachine, assign } from 'xstate'
+import { createPinia, defineStore, setActivePinia } from 'pinia'
+import { beforeEach, describe, expect, test } from 'vitest'
+import { assign, createMachine } from 'xstate'
 import xstate from '../src'
 
-const increment = (context) => context.count + 1
-const decrement = (context) => context.count - 1
+const increment = context => context.count + 1
+const decrement = context => context.count - 1
 
 const counterMachine = createMachine({
   id: 'counter',
