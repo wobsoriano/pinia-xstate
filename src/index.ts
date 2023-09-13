@@ -1,11 +1,10 @@
 import { createActor } from 'xstate'
-import type { Actor, ActorOptions, AnyStateMachine, MaybeLazy, StateFrom } from 'xstate'
+import type { Actor, AnyStateMachine, MaybeLazy, Prop, StateFrom } from 'xstate'
 import type { Ref } from 'vue'
 import { markRaw, shallowRef } from 'vue'
+import { RestParams } from './types';
 
-type Prop<T, K> = K extends keyof T ? T[K] : never;
-
-type UseMachineReturn<
+type MachineStoreReturn<
   TMachine extends AnyStateMachine,
   TInterpreter = Actor<TMachine>
 > = {
@@ -16,29 +15,39 @@ type UseMachineReturn<
 
 function xstate<TMachine extends AnyStateMachine>(
   machine: MaybeLazy<TMachine>,
-  interpreterOptions?: ActorOptions<TMachine>,
+  options: RestParams<TMachine> = {},
 ) {
-  const actor = createActor(machine as any, interpreterOptions)
+  const { guards, actions, actors, delays, ...interpreterOptions } = options;
+
+  const machineConfig = {
+    guards,
+    actions,
+    actors,
+    delays
+  };
+
+  // @ts-expect-error: Missing internal type
+  const machineWithConfig = machine.provide(machineConfig);
+
+  const actor = createActor(machineWithConfig, interpreterOptions).start()
+
   let snapshot = actor.getSnapshot()
 
   return () => {
     const state = shallowRef(snapshot)
 
-    actor
-    .subscribe((nextSnapshot) => {
+    actor.subscribe((nextSnapshot) => {
       if (nextSnapshot !== snapshot) {
         snapshot = nextSnapshot
         state.value = snapshot
       }
     })
 
-    actor.start()
-
     return {
       state,
       send: markRaw(actor.send),
       service: markRaw(actor),
-    } as UseMachineReturn<TMachine>
+    } as MachineStoreReturn<TMachine>
   }
 }
 
