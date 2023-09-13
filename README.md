@@ -8,7 +8,7 @@ This middleware allows you to easily put your [xstate](https://github.com/statel
 ## Installation
 
 ```bash
-npm install pinia xstate pinia-xstate
+npm install xstate pinia-xstate
 ```
 
 ## Usage
