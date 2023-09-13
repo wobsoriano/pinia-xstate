@@ -1,6 +1,6 @@
 import { createActor } from 'xstate'
 import type { Actor, AnyStateMachine, MaybeLazy, Prop, StateFrom } from 'xstate'
-import type { Ref } from 'vue'
+import type { ShallowRef } from 'vue'
 import { markRaw, shallowRef } from 'vue'
 import { RestParams } from './types';
 
@@ -8,7 +8,7 @@ type MachineStoreReturn<
   TMachine extends AnyStateMachine,
   TInterpreter = Actor<TMachine>
 > = {
-  state: Ref<StateFrom<TMachine>>;
+  state: ShallowRef<StateFrom<TMachine>>;
   send: Prop<TInterpreter, 'send'>;
   service: TInterpreter;
 };
