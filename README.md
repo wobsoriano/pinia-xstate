@@ -47,7 +47,7 @@ const store = useToggleStore()
 
 <template>
     <button @click="store.send('TOGGLE')">
-        {{state.value === 'inactive'
+        {{store.state.value === 'inactive'
             ? 'Click to activate'
             : 'Active! Click to deactivate'}}
     </button>
