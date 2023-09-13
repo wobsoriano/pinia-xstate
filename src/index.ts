@@ -1,51 +1,44 @@
-import { State, interpret } from 'xstate'
-import type { Interpreter, InterpreterOptions, StateMachine } from 'xstate'
+import { createActor } from 'xstate'
+import type { Actor, ActorOptions, AnyStateMachine, MaybeLazy, StateFrom } from 'xstate'
 import type { Ref } from 'vue'
-import { markRaw, ref } from 'vue'
+import { markRaw, shallowRef } from 'vue'
 
-export type Store<M> = M extends StateMachine<
-  infer Context,
-  infer Schema,
-  infer Event,
-  infer State,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  infer _A,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  infer _B,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  infer _C
->
-  ? {
-    state: Ref<Interpreter<Context, Schema, Event, State>['state']>
-    send: Interpreter<Context, Schema, Event, State>['send']
-    service: Interpreter<Context, Schema, Event, State>
-  }
-  : never
+type Prop<T, K> = K extends keyof T ? T[K] : never;
 
-function xstate<M extends StateMachine<any, any, any, any, any, any, any>>(
-  machine: M,
-  interpreterOptions?: InterpreterOptions,
-  initialState = machine.initialState,
+type UseMachineReturn<
+  TMachine extends AnyStateMachine,
+  TInterpreter = Actor<TMachine>
+> = {
+  state: Ref<StateFrom<TMachine>>;
+  send: Prop<TInterpreter, 'send'>;
+  service: TInterpreter;
+};
+
+function xstate<TMachine extends AnyStateMachine>(
+  machine: MaybeLazy<TMachine>,
+  interpreterOptions?: ActorOptions<TMachine>,
 ) {
-  const service = interpret(machine, interpreterOptions)
-  return () => {
-    const state = ref(initialState)
-    service
-      .onTransition((nextState) => {
-        const initialStateChanged
-          = nextState.changed === undefined
-          && Object.keys(nextState.children).length
+  const actor = createActor(machine as any, interpreterOptions)
+  let snapshot = actor.getSnapshot()
 
-        if (nextState.changed || initialStateChanged)
-          state.value = nextState
-      })
-      .start(State.create(initialState))
+  return () => {
+    const state = shallowRef(snapshot)
+
+    actor
+    .subscribe((nextSnapshot) => {
+      if (nextSnapshot !== snapshot) {
+        snapshot = nextSnapshot
+        state.value = snapshot
+      }
+    })
+
+    actor.start()
 
     return {
       state,
-      send: markRaw(service.send),
-      service: markRaw(service),
-    } as Store<M>
+      send: markRaw(actor.send),
+      service: markRaw(actor),
+    } as UseMachineReturn<TMachine>
   }
 }
 

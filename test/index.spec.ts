@@ -26,9 +26,9 @@ describe('xstate', () => {
   test('toggles', () => {
     const store = useToggleStore()
     expect(store.state.value).toBe('inactive')
-    store.send('TOGGLE')
+    store.send({ type: 'TOGGLE' })
     expect(store.state.value).toBe('active')
-    store.send('TOGGLE')
+    store.send({ type: 'TOGGLE' })
     expect(store.state.value).toBe('inactive')
   })
 })
