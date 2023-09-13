@@ -38,7 +38,7 @@ export const useToggleStore = defineStore(
 )
 ```
 
-```html
+```vue
 <script setup>
 import { useToggleStore } from './store/toggle'
 
