@@ -16,10 +16,10 @@ export type Store<M> = M extends StateMachine<
   infer _C
 >
   ? {
-      state: Ref<Interpreter<Context, Schema, Event, State>['state']>
-      send: Interpreter<Context, Schema, Event, State>['send']
-      service: Interpreter<Context, Schema, Event, State>
-    }
+    state: Ref<Interpreter<Context, Schema, Event, State>['state']>
+    send: Interpreter<Context, Schema, Event, State>['send']
+    service: Interpreter<Context, Schema, Event, State>
+  }
   : never
 
 function xstate<M extends StateMachine<any, any, any, any, any, any, any>>(
@@ -40,6 +40,7 @@ function xstate<M extends StateMachine<any, any, any, any, any, any, any>>(
           state.value = nextState
       })
       .start(State.create(initialState))
+
     return {
       state,
       send: markRaw(service.send),

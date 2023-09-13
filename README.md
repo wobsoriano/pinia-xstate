@@ -8,47 +8,50 @@ This middleware allows you to easily put your [xstate](https://github.com/statel
 ## Installation
 
 ```bash
-pnpm add pinia xstate pinia-xstate # or npm or yarn
+npm install pinia xstate pinia-xstate
 ```
 
 ## Usage
 
 ```ts
 import { defineStore } from 'pinia'
-import { assign, createMachine } from 'xstate'
+import { createMachine } from 'xstate'
 import xstate from 'pinia-xstate'
 
-const increment = context => context.count + 1
-const decrement = context => context.count - 1
-
-export const counterMachine = createMachine({
-  id: 'counter',
-  initial: 'active',
-  context: {
-    count: 0,
-  },
+export const toggleMachine = createMachine({
+  id: 'toggle',
+  initial: 'inactive',
   states: {
-    active: {
-      on: {
-        INC: { actions: assign({ count: increment }) },
-        DEC: { actions: assign({ count: decrement }) },
-      },
+    inactive: {
+      on: { TOGGLE: 'active' }
     },
-  },
-})
+    active: {
+      on: { TOGGLE: 'inactive' }
+    }
+  }
+});
 
 // create a store using the xstate middleware
-export const useCounterStore = defineStore(
-  counterMachine.id,
-  xstate(counterMachine)
+export const useToggleStore = defineStore(
+  toggleMachine.id,
+  xstate(toggleMachine)
 )
+```
 
-// use the store in your components
-const store = useCounterStore()
+```html
+<script setup>
+import { useToggleStore } from './store/toggle'
 
-store.state.context.count
-store.send('INC')
-store.send('DEC')
+const store = useToggleStore()
+</script>
+
+<template>
+    <button @click="store.send('TOGGLE')">
+        {{state.value === 'inactive'
+            ? 'Click to activate'
+            : 'Active! Click to deactivate'}}
+    </button>
+</template>
 ```
 
 ## License
