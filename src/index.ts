@@ -1,52 +1,45 @@
-import { State, interpret } from 'xstate'
-import type { Interpreter, InterpreterOptions, StateMachine } from 'xstate'
-import type { Ref } from 'vue'
-import { markRaw, ref } from 'vue'
+import { createActor } from 'xstate';
+import type {
+  ActorOptions,
+  ActorRefFrom,
+  AnyActorLogic,
+  EventFromLogic,
+  PersistedStateFrom,
+  SnapshotFrom,
+} from 'xstate';
+import type { Ref, UnwrapRef } from 'vue';
+import { markRaw, ref } from 'vue';
 
-export type Store<M> = M extends StateMachine<
-  infer Context,
-  infer Schema,
-  infer Event,
-  infer State,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  infer _A,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  infer _B,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  infer _C
->
-  ? {
-    state: Ref<Interpreter<Context, Schema, Event, State>['state']>
-    send: Interpreter<Context, Schema, Event, State>['send']
-    service: Interpreter<Context, Schema, Event, State>
-  }
-  : never
+export type Store<M extends AnyActorLogic> = {
+  state: SnapshotFrom<M>;
+  send: (event: EventFromLogic<M>) => void;
+  actor: ActorRefFrom<M>;
+};
 
-function xstate<M extends StateMachine<any, any, any, any, any, any, any>>(
-  machine: M,
-  interpreterOptions?: InterpreterOptions,
-  initialState = machine.initialState,
+function xstate<M extends AnyActorLogic>(
+  actorLogic: M,
+  interpreterOptions?: ActorOptions<M>,
+  initialState?: PersistedStateFrom<M>
 ) {
-  const service = interpret(machine, interpreterOptions)
+  const actorRef = createActor(actorLogic, {
+    ...interpreterOptions,
+    state: initialState,
+  });
   return () => {
-    const state = ref(initialState)
-    service
-      .onTransition((nextState) => {
-        const initialStateChanged
-          = nextState.changed === undefined
-          && Object.keys(nextState.children).length
-
-        if (nextState.changed || initialStateChanged)
-          state.value = nextState
-      })
-      .start(State.create(initialState))
+    const snapshotRef: Ref<UnwrapRef<SnapshotFrom<M>>> = ref(
+      actorRef.getSnapshot()
+    );
+    actorRef.subscribe((nextState) => {
+      snapshotRef.value = nextState;
+    });
+    actorRef.start();
 
     return {
-      state,
-      send: markRaw(service.send),
-      service: markRaw(service),
-    } as Store<M>
-  }
+      state: snapshotRef,
+      send: markRaw(actorRef.send),
+      actor: markRaw(actorRef),
+    } as Store<M>;
+  };
 }
 
-export default xstate
+export default xstate;

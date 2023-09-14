@@ -29,7 +29,7 @@
   },
   "peerDependencies": {
     "pinia": "^2.0.0",
-    "xstate": "^4.30.0"
+    "xstate": "^5.0.0-beta.28"
   },
   "dependencies": {
     "vue": "^3.3.4"
@@ -43,7 +43,7 @@
     "tsup": "^7.2.0",
     "typescript": "^5.2.2",
     "vitest": "^0.34.4",
-    "xstate": "^4.38.2"
+    "xstate": "^5.0.0-beta.28"
   },
   "eslintConfig": {
     "extends": "@antfu"
