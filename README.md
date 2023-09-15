@@ -5,10 +5,12 @@
 
 This middleware allows you to easily put your [xstate](https://github.com/statelyai/xstate) state machines into a global [pinia](https://pinia.esm.dev/) store.
 
+> This branch is for XState v5. If you're in Xstate v4, go [here](https://github.com/wobsoriano/pinia-xstate/tree/xstate-v4) instead.
+
 ## Installation
 
 ```bash
-npm install pinia xstate pinia-xstate
+npm install xstate@5.0.0-beta.28 pinia-xstate@2.0.0-beta.1
 ```
 
 ## Usage
