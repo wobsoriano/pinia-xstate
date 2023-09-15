@@ -29,7 +29,7 @@ export const toggleMachine = createMachine({
       on: { TOGGLE: 'inactive' }
     }
   }
-});
+})
 
 // create a store using the xstate middleware
 export const useToggleStore = defineStore(
@@ -46,11 +46,11 @@ const store = useToggleStore()
 </script>
 
 <template>
-    <button @click="store.send('TOGGLE')">
-        {{store.state.value === 'inactive'
-            ? 'Click to activate'
-            : 'Active! Click to deactivate'}}
-    </button>
+  <button @click="store.send('TOGGLE')">
+    {{ store.state.value === 'inactive'
+      ? 'Click to activate'
+      : 'Active! Click to deactivate' }}
+  </button>
 </template>
 ```
 

@@ -1,4 +1,4 @@
-import { createActor } from 'xstate';
+import { createActor } from 'xstate'
 import type {
   ActorOptions,
   ActorRefFrom,
@@ -6,40 +6,40 @@ import type {
   EventFromLogic,
   PersistedStateFrom,
   SnapshotFrom,
-} from 'xstate';
-import type { Ref, UnwrapRef } from 'vue';
-import { markRaw, ref } from 'vue';
+} from 'xstate'
+import type { Ref, UnwrapRef } from 'vue'
+import { markRaw, ref } from 'vue'
 
-export type Store<M extends AnyActorLogic> = {
-  state: SnapshotFrom<M>;
-  send: (event: EventFromLogic<M>) => void;
-  actor: ActorRefFrom<M>;
-};
+export interface Store<M extends AnyActorLogic> {
+  state: SnapshotFrom<M>
+  send: (event: EventFromLogic<M>) => void
+  actor: ActorRefFrom<M>
+}
 
 function xstate<M extends AnyActorLogic>(
   actorLogic: M,
   interpreterOptions?: ActorOptions<M>,
-  initialState?: PersistedStateFrom<M>
+  initialState?: PersistedStateFrom<M>,
 ) {
   const actorRef = createActor(actorLogic, {
     ...interpreterOptions,
     state: initialState,
-  });
+  })
   return () => {
     const snapshotRef: Ref<UnwrapRef<SnapshotFrom<M>>> = ref(
-      actorRef.getSnapshot()
-    );
+      actorRef.getSnapshot(),
+    )
     actorRef.subscribe((nextState) => {
-      snapshotRef.value = nextState;
-    });
-    actorRef.start();
+      snapshotRef.value = nextState
+    })
+    actorRef.start()
 
     return {
       state: snapshotRef,
       send: markRaw(actorRef.send),
       actor: markRaw(actorRef),
-    } as Store<M>;
-  };
+    } as Store<M>
+  }
 }
 
-export default xstate;
+export default xstate

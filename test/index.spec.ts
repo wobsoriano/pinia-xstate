@@ -1,7 +1,7 @@
-import { createPinia, defineStore, setActivePinia } from 'pinia';
-import { beforeEach, describe, expect, test } from 'vitest';
-import { createMachine } from 'xstate';
-import xstate from '../src';
+import { createPinia, defineStore, setActivePinia } from 'pinia'
+import { beforeEach, describe, expect, test } from 'vitest'
+import { createMachine } from 'xstate'
+import xstate from '../src'
 
 const toggleMachine = createMachine({
   id: 'toggle',
@@ -14,21 +14,21 @@ const toggleMachine = createMachine({
       on: { TOGGLE: 'inactive' },
     },
   },
-});
+})
 
-const useToggleStore = defineStore(toggleMachine.id, xstate(toggleMachine));
+const useToggleStore = defineStore(toggleMachine.id, xstate(toggleMachine))
 
 describe('xstate', () => {
   beforeEach(() => {
-    setActivePinia(createPinia());
-  });
+    setActivePinia(createPinia())
+  })
 
   test('toggles', () => {
-    const store = useToggleStore();
-    expect(store.state.value).toBe('inactive');
-    store.send({ type: 'TOGGLE' });
-    expect(store.state.value).toBe('active');
-    store.send({ type: 'TOGGLE' });
-    expect(store.state.value).toBe('inactive');
-  });
-});
+    const store = useToggleStore()
+    expect(store.state.value).toBe('inactive')
+    store.send({ type: 'TOGGLE' })
+    expect(store.state.value).toBe('active')
+    store.send({ type: 'TOGGLE' })
+    expect(store.state.value).toBe('inactive')
+  })
+})

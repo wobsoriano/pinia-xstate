@@ -9,8 +9,8 @@
     "state machines"
   ],
   "exports": {
-    "require": "./dist/index.js",
-    "import": "./dist/index.mjs"
+    "import": "./dist/index.mjs",
+    "require": "./dist/index.js"
   },
   "main": "dist/index.js",
   "module": "dist/index.mjs",
