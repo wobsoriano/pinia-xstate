@@ -5,6 +5,9 @@ import xstate from '../src'
 
 const toggleMachine = createMachine({
   id: 'toggle',
+  context: {
+    count: 0,
+  },
   initial: 'inactive',
   states: {
     inactive: {
