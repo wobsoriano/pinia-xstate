@@ -1,5 +1,5 @@
 import { createPinia, defineStore, setActivePinia } from 'pinia'
-import { beforeEach, describe, expect, test } from 'vitest'
+import { beforeEach, describe, expect, it } from 'vitest'
 import { createMachine } from 'xstate'
 import xstate from '../src'
 
@@ -26,7 +26,7 @@ describe('xstate', () => {
     setActivePinia(createPinia())
   })
 
-  test('toggles', () => {
+  it('toggles', () => {
     const store = useToggleStore()
     expect(store.state.value).toBe('inactive')
     store.send({ type: 'TOGGLE' })
