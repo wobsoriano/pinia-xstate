@@ -4,11 +4,10 @@ import type {
   ActorRefFrom,
   AnyActorLogic,
   EventFromLogic,
-  PersistedStateFrom,
   SnapshotFrom,
 } from 'xstate'
 import type { Ref, UnwrapRef } from 'vue'
-import { markRaw, ref } from 'vue'
+import { markRaw, shallowRef } from 'vue'
 
 export interface Store<M extends AnyActorLogic> {
   state: SnapshotFrom<M>
@@ -18,15 +17,11 @@ export interface Store<M extends AnyActorLogic> {
 
 function xstate<M extends AnyActorLogic>(
   actorLogic: M,
-  interpreterOptions?: ActorOptions<M>,
-  initialState?: PersistedStateFrom<M>,
+  actorOptions?: ActorOptions<M>,
 ) {
-  const actorRef = createActor(actorLogic, {
-    ...interpreterOptions,
-    state: initialState,
-  })
+  const actorRef = createActor(actorLogic as any, actorOptions)
   return () => {
-    const snapshotRef: Ref<UnwrapRef<SnapshotFrom<M>>> = ref(
+    const snapshotRef: Ref<UnwrapRef<SnapshotFrom<M>>> = shallowRef(
       actorRef.getSnapshot(),
     )
     actorRef.subscribe((nextState) => {
