@@ -1,7 +1,7 @@
 import { createPinia, defineStore, setActivePinia } from 'pinia'
 import { beforeEach, describe, expect, it } from 'vitest'
 import { createMachine } from 'xstate'
-import xstate from '../src'
+import { xstate } from '../src'
 
 const toggleMachine = createMachine({
   id: 'toggle',

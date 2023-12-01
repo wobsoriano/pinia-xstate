@@ -15,7 +15,7 @@ export interface Store<M extends AnyActorLogic> {
   actor: ActorRefFrom<M>
 }
 
-function xstate<M extends AnyActorLogic>(
+export function xstate<M extends AnyActorLogic>(
   actorLogic: M,
   actorOptions?: ActorOptions<M>,
 ) {
@@ -37,4 +37,9 @@ function xstate<M extends AnyActorLogic>(
   }
 }
 
-export default xstate
+/**
+ * @deprecated Use `import { xstate } from 'xstate'` instead
+ */
+const deprecatedImport = xstate
+
+export default deprecatedImport
