@@ -1,5 +1,6 @@
 {
   "name": "pinia-xstate",
+  "type": "module",
   "version": "2.0.0",
   "description": "Put your xstate state machines into a global pinia store.",
   "license": "MIT",
@@ -8,19 +9,34 @@
     "xstate",
     "state machines"
   ],
+  "sideEffects": false,
   "exports": {
-    "import": "./dist/index.mjs",
-    "require": "./dist/index.js"
+    ".": {
+      "types": {
+        "import": "./dist/index.d.ts",
+        "require": "./dist/index.d.cts"
+      },
+      "import": "./dist/index.js",
+      "require": "./dist/index.cjs"
+    }
   },
-  "main": "dist/index.js",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "unpkg": "dist/index.global.js",
+  "jsdelivr": "dist/index.global.js",
+  "types": "./dist/index.d.ts",
+  "typesVersions": {
+    "*": {
+      "*": [
+        "./dist/*"
+      ]
+    }
+  },
   "files": [
     "dist"
   ],
   "scripts": {
-    "build-fast": "tsup src/index.ts --format cjs,esm",
-    "build": "nr build-fast --dts-resolve --minify",
+    "build": "tsup",
     "test": "vitest run",
     "release": "bumpp --commit --push --tag && npm publish",
     "prepublishOnly": "nr build",
