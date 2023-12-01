@@ -10,7 +10,7 @@ This middleware allows you to easily put your [xstate](https://github.com/statel
 ## Installation
 
 ```bash
-npm install xstate@5.0.0-beta.28 pinia-xstate@2.0.0-beta.1
+npm install xstate pinia-xstate
 ```
 
 ## Usage
