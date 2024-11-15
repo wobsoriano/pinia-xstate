@@ -36,10 +36,3 @@ export function xstate<M extends AnyActorLogic>(
     } as Store<M>
   }
 }
-
-/**
- * @deprecated Use `import { xstate } from 'xstate'` instead
- */
-const deprecatedImport = xstate
-
-export default deprecatedImport
