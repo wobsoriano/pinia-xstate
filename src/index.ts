@@ -1,4 +1,4 @@
-import { createActor } from 'xstate'
+import type { Ref, UnwrapRef } from 'vue'
 import type {
   ActorOptions,
   ActorRefFrom,
@@ -6,8 +6,8 @@ import type {
   EventFromLogic,
   SnapshotFrom,
 } from 'xstate'
-import type { Ref, UnwrapRef } from 'vue'
 import { markRaw, shallowRef } from 'vue'
+import { createActor } from 'xstate'
 
 export interface Store<M extends AnyActorLogic> {
   state: SnapshotFrom<M>

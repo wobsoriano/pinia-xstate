@@ -17,8 +17,8 @@ npm install xstate pinia-xstate
 
 ```ts
 import { defineStore } from 'pinia'
-import { createMachine } from 'xstate'
 import { xstate } from 'pinia-xstate'
+import { createMachine } from 'xstate'
 
 export const toggleMachine = createMachine({
   id: 'toggle',
