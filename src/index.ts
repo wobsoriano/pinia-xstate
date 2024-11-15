@@ -1,4 +1,3 @@
-import type { Ref, UnwrapRef } from 'vue'
 import type {
   ActorOptions,
   ActorRefFrom,
@@ -21,7 +20,7 @@ export function xstate<M extends AnyActorLogic>(
 ) {
   const actorRef = createActor(actorLogic as any, actorOptions)
   return () => {
-    const snapshotRef: Ref<UnwrapRef<SnapshotFrom<M>>> = shallowRef(
+    const snapshotRef = shallowRef<SnapshotFrom<M>>(
       actorRef.getSnapshot(),
     )
     actorRef.subscribe((nextState) => {
