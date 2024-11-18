@@ -2,8 +2,6 @@
 
 Put your [xstate](https://github.com/statelyai/xstate) state machines into a global [pinia](https://pinia.esm.dev/) store.
 
-> This branch is for XState v5. If you're in Xstate v4, go [here](https://github.com/wobsoriano/pinia-xstate/tree/xstate-v4) instead.
-
 ## Installation
 
 ```bash
