@@ -1,9 +1,6 @@
 # pinia-xstate
 
-[![npm version](https://badge.fury.io/js/pinia-xstate.svg)](https://badge.fury.io/js/pinia-xstate)
-[![bundle size](https://badgen.net/bundlephobia/minzip/pinia-xstate)](https://bundlephobia.com/result?p=pinia-xstate)
-
-This middleware allows you to easily put your [xstate](https://github.com/statelyai/xstate) state machines into a global [pinia](https://pinia.esm.dev/) store.
+Put your [xstate](https://github.com/statelyai/xstate) state machines into a global [pinia](https://pinia.esm.dev/) store.
 
 > This branch is for XState v5. If you're in Xstate v4, go [here](https://github.com/wobsoriano/pinia-xstate/tree/xstate-v4) instead.
 
