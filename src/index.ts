@@ -18,7 +18,7 @@ export function xstate<M extends AnyActorLogic>(
   actorLogic: M,
   actorOptions?: ActorOptions<M>,
 ) {
-  const actorRef = createActor(actorLogic as any, actorOptions)
+  const actorRef = createActor(actorLogic, actorOptions)
   return () => {
     const snapshotRef = shallowRef<SnapshotFrom<M>>(
       actorRef.getSnapshot(),

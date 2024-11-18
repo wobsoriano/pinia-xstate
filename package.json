@@ -46,7 +46,7 @@
   },
   "peerDependencies": {
     "pinia": "^2.0.0",
-    "xstate": "^5.0.0"
+    "xstate": "^5.15.0"
   },
   "dependencies": {
     "vue": "^3.3.9"
