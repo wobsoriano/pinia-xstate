@@ -45,18 +45,18 @@
     "lint:fix": "eslint . --fix"
   },
   "peerDependencies": {
-    "pinia": "^2.0.0",
+    "pinia": "^3.0.0",
     "xstate": "^5.15.0"
   },
   "dependencies": {
-    "vue": "^3.3.9"
+    "vue": "^3.5.11"
   },
   "devDependencies": {
     "@antfu/eslint-config": "^3.9.1",
     "bumpp": "^9.8.1",
     "eslint": "^9.14.0",
     "eslint-plugin-format": "^0.1.2",
-    "pinia": "^2.2.6",
+    "pinia": "^3.0.1",
     "tsup": "^8.3.5",
     "typescript": "^5.3.2",
     "vitest": "^2.1.5",
